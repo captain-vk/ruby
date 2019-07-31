@@ -1,17 +1,13 @@
-puts 'Введите сторону a: '
+puts "Введите сторону a:"
 a = gets.chomp.to_f
 
-puts 'Введите сторону b: '
+puts "Введите сторону b:"
 b = gets.chomp.to_f
 
-print 'Введите сторону c: '
+puts "Введите сторону c:"
 c = gets.chomp.to_f
 
-array = [a,b,c].sort
-
-a = array[0]
-b = array[1]
-c = array[2]
+a, b, c = [a, b, c].sort
 
 if a == b && b == c
   puts "Треугольник равносторонний"
