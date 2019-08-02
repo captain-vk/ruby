@@ -11,15 +11,12 @@ loop do
   price = gets.chomp.to_f
   puts "Кол-во"
   number = gets.chomp.to_f
-  basket[name] = {price => number}
+  basket[name] = {price: price, number: number, cost_goods: price * number}
 end
 puts basket
-basket.each do |name, cost|
-  cost.each do |i,j|
-    cost_goods = i * j
-    puts "#{name} cost #{cost_goods}"
-    all_price += cost_goods
-    end
+
+basket.each_value do |cost|
+  all_price += cost[:cost_goods]
 end
 
 puts "Total price: #{all_price}"

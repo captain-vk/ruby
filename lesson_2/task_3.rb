@@ -1,12 +1,7 @@
-i = 0
-index = 0
-arr = [1]
+arr = [1, 2]
 
-while arr.last < 100
-  index = arr[i] + arr[i - 1]
-  i += 1
-  arr.push(index)
+while (number = arr[-2] + arr[-1]) <= 100
+  arr.push(number)
 end
 
-arr.delete_at(arr.size - 1)
 puts arr

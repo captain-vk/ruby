@@ -1,15 +1,11 @@
 ALPHABET = ('a'..'z')
 vowels = ['a', 'e', 'i', 'o', 'u', 'y']
 result = {}
-i = 1
 
-ALPHABET.each do |letter|
-  vowels.each do|vowel_letter|
-    if letter == vowel_letter
-      result[letter] = i
-    end
-  end
-i += 1
+ALPHABET.each.with_index(1) do |char, index|
+if vowels.include? char
+  result[char] = index
+end
 end
 
 puts result

@@ -1,8 +1,8 @@
-index = 10
+number = 10
 arr = []
-while index <= 100 do
-  arr.push(index)
-  index += 5
+while number <= 100 do
+  arr.push(number)
+  number += 5
 end
 
 puts arr

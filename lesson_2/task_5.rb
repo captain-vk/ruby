@@ -10,14 +10,9 @@ month = gets.chomp.to_i
 puts "Введите год"
 year = gets.chomp.to_i
 
-for i in 0..month - 2
-  result += days[i]
-end
-
-result += number
-
 if ((year % 4 == 0) && (year % 100 != 0)) || (year % 400 == 0)
-  result += 1
+  days[1] = 29
 end
 
+result = days.take(month - 2).sum + number
 puts result
