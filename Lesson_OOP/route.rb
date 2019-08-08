@@ -1,10 +1,8 @@
 class Route
-  attr_accessor :stations
+  attr_reader :stations
 
   def initialize(first, last)
-    @stations = []
-    @stations << first
-    @stations << last
+    @stations = [first, last]
   end
 
   def add_station(station)
@@ -15,7 +13,4 @@ class Route
     @stations.delete(station) if @stations.last != station && @stations.first
   end
 
-  def show_stations
-    puts @stations
-  end
 end
