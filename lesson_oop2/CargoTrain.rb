@@ -1,8 +1,8 @@
 class CargoTrain < Train
-  def initialize(number, type = :cargo)
+  def initialize(number, type = 'cargo')
     super
   end
-  def add_wagon_cargo(CargoWagon)
-    CargoWagon.type == type
+  def add_wagon_cargo(wagon)
+    wagon.type == type
   end
 end
