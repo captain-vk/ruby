@@ -43,6 +43,7 @@ class Train
     end
   end
 
+<<<<<<< HEAD
     private
     # 
 
@@ -56,4 +57,13 @@ class Train
       @current_station = @route.stations[@route.stations.index(@current_station) - 1] if @current_station != @route.stations.first
       end
 
+=======
+  def next_station
+    @route.stations[@route.stations.index(@current_station) + 1] if @current_station != @route.stations.last
+    end
+
+  def previous_station
+    @current_station = @route.stations[@route.stations.index(@current_station) - 1] if @current_station != @route.stations.first
+    end
+>>>>>>> 1b301175b501c248e83bb41c7bd2d1d1efa11992
   end

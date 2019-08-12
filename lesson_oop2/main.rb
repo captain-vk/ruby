@@ -5,6 +5,7 @@ require_relative 'PassengerTrain'
 require_relative 'CargoTrain'
 require_relative 'CargoWagon'
 require_relative 'PassengerWagon'
+<<<<<<< HEAD
 
 class Main
   attr_reader :stations, :trains, :routes
@@ -112,3 +113,5 @@ end
 
 
 end
+=======
+>>>>>>> 1b301175b501c248e83bb41c7bd2d1d1efa11992
