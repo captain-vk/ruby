@@ -70,11 +70,11 @@ def create_train
     when 1
       puts "Введите номер поезда"
       number = gets.chomp
-      train = Train.new(number,'passenger')
+      train = PassengerTrain.new(number)
     when 2
       puts "Введите номер поезда"
       number = gets.chomp
-      train = Train.new(number,'cargo')
+      train = CargoTrain.new(number)
       end
   trains << train
 end
@@ -113,10 +113,15 @@ end
     current_route.delete_station(stations[number_station])
     end
 
-    def add_wagon
-      trains.each.with_index { |train, index| puts "#{index} - #{train.number}:#{train.type}" }
-      puts "Выберите поезд для добавления к нему вагона"
-
+  def add_wagon
+    trains.each.with_index { |train, index| puts "#{index} - #{train.number}(#{train.type})" }
+    puts "Выберите поезд для добавления к нему вагона"
+    number_train = gets.chomp.to_i
+      if trains[number_train].type == 'cargo'
+          trains[number_train].add_wagon(CargoWagon.new('cargo'))
+        elsif trains[number_train].type == 'passenger'
+            trains[number_train].add_wagon(PassengerWagon.new('passenger'))
+      end
 
     end
     #puts "Если требуется добавить промежуточную станцию"
