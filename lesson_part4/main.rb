@@ -45,7 +45,7 @@ class Main
     when 7
       add_wagon
     when 8
-      qwerty
+      delete_wagon
     when 9
       move_train
     when 10
@@ -136,12 +136,14 @@ class Main
       end
     end
 
-  def qwerty
+  def delete_wagon
     trains.each.with_index { |train, index| puts "#{index} - #{train.number}(#{train.type})" }
     puts "Выберите поезд для отцепления от него вагона"
     number_train = gets.chomp.to_i
-    #trains[number_train].delete_wagon
+    trains[number_train].delete_wagon
+
     end
+
 
 
   end
