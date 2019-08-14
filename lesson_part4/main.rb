@@ -60,6 +60,7 @@ class Main
     name = gets.chomp.to_s
     station = Station.new(name)
     stations << station
+    main_menu
   end
 
   def create_train
@@ -77,6 +78,7 @@ class Main
       train = CargoTrain.new(number)
     end
       trains << train
+    main_menu
   end
 
   def create_route
@@ -89,6 +91,7 @@ class Main
     number_last = gets.chomp.to_i
     last = @stations[number_last]
     routes << Route.new(first, last)
+    main_menu
   end
 
   def add_stations_on_route
@@ -100,6 +103,7 @@ class Main
     stations.each.with_index { |station, index| puts "#{index} - #{station.name}" }
     number_station = gets.chomp.to_i
     current_route.add_station(stations[number_station])
+    main_menu
   end
 
   def delete_stations_on_route
@@ -111,6 +115,7 @@ class Main
     stations.each.with_index { |station, index| puts "#{index} - #{station.name}" }
     number_station = gets.chomp.to_i
     current_route.delete_station(stations[number_station])
+    main_menu
   end
 
   def get_route_to_train
@@ -123,6 +128,7 @@ class Main
     number_train = gets.chomp.to_i
     current_train = trains[number_train]
     current_train.add_route(current_route)
+    main_menu
   end
 
   def add_wagon
@@ -134,16 +140,39 @@ class Main
       elsif trains[number_train].type == :passenger
         trains[number_train].add_wagon(PassengerWagon.new(:passenger))
       end
+    main_menu
     end
 
   def delete_wagon
     trains.each.with_index { |train, index| puts "#{index} - #{train.number}(#{train.type})" }
     puts "Выберите поезд для отцепления от него вагона"
     number_train = gets.chomp.to_i
-    trains[number_train].delete_wagon
-
+    trains[number_train].wagons.delete_wagon
+    main_menu
     end
 
+  def move_train
+    trains.each.with_index { |train, index| puts "#{index} - #{train.number}(#{train.type})" }
+    puts "Выберите поезд для перемещения по маршруту"
+    number_train = gets.chomp.to_i
+    puts "Для перемещения вперед нажмите 1 для перемещения назад 2"
+    input = gets.chomp.to_i
+    case input
+    when 1
+      trains[number_train].move_forward
+    when 2
+      trains[number_train].move_back
+    end
+    main_menu
+    end
 
-
+  def list_trains_and_stations
+    stations.each.with_index { |station, index| puts "#{index} - #{station.name}" }
+    puts "Введите номер станции для просмотра поездов на ней"
+    number_station = gets.chomp.to_i
+    number_train = stations[number_station].trains.map { |train| train.number}
+    type_train = stations[number_station].trains.map { |train| train.type}
+    puts "номер поезда:#{number_train} тип:#{type_train}"
+    main_menu
   end
+end
