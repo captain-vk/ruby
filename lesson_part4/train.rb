@@ -20,7 +20,7 @@ class Train
     @wagons << wagon if @speed == 0
   end
 
-  def delete_wagon()
+  def delete_wagon
     @wagons.pop if ((@speed == 0) && (@wagons.size > 0))
   end
 
