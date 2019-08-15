@@ -79,7 +79,7 @@ class Main
       train = CargoTrain.new(number)
     end
     trains << train
-    main_menu
+		main_menu
   end
 
   def create_route
@@ -141,6 +141,7 @@ class Main
     elsif trains[number_train].type == :passenger
       trains[number_train].add_wagon(PassengerWagon.new(:passenger))
     end
+		puts "Количество вагонов у данного поезда - #{trains[number_train].count_wagons - 1}"
     main_menu
   end
 
@@ -148,7 +149,8 @@ class Main
     trains.each.with_index { |train, index| puts "#{index} - #{train.number}(#{train.type})" }
     puts "Выберите поезд для отцепления от него вагона"
     number_train = gets.chomp.to_i
-    trains[number_train].wagons.delete_wagon
+    trains[number_train].delete_wagon
+		puts "Количество вагонов у данного поезда - #{trains[number_train].count_wagons - 1}"
     main_menu
   end
 
