@@ -149,7 +149,7 @@ class Main
     trains.each.with_index { |train, index| puts "#{index} - #{train.number}(#{train.type})" }
     puts "Выберите поезд для отцепления от него вагона"
     number_train = gets.chomp.to_i
-    trains[number_train].delete_wagon
+    trains[number_train].delete_wagon if trains[number_train].wagons.length != 0
     puts "Количество вагонов у данного поезда - #{trains[number_train].count_wagons}"
     main_menu
   end
