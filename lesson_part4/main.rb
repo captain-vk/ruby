@@ -8,7 +8,7 @@ require_relative 'passenger_wagon'
 
 
 class Main
-  attr_reader :stations, :trains, :routes
+	attr_reader :stations, :trains, :routes
 
   def initialize
     @stations = []
@@ -79,7 +79,7 @@ class Main
       train = CargoTrain.new(number)
     end
     trains << train
-    main_menu
+		main_menu
   end
 
   def create_route
@@ -141,7 +141,7 @@ class Main
     elsif trains[number_train].type == :passenger
       trains[number_train].add_wagon(PassengerWagon.new(:passenger))
     end
-    puts "Количество вагонов у данного поезда - #{trains[number_train].count_wagons - 1}"
+    puts "Количество вагонов у данного поезда - #{trains[number_train].count_wagons}"
     main_menu
   end
 
@@ -150,7 +150,7 @@ class Main
     puts "Выберите поезд для отцепления от него вагона"
     number_train = gets.chomp.to_i
     trains[number_train].delete_wagon
-    puts "Количество вагонов у данного поезда - #{trains[number_train].count_wagons - 1}"
+    puts "Количество вагонов у данного поезда - #{trains[number_train].count_wagons}"
     main_menu
   end
 
