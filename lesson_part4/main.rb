@@ -6,6 +6,7 @@ require_relative 'cargo_train'
 require_relative 'cargo_wagon'
 require_relative 'passenger_wagon'
 
+
 class Main
   attr_reader :stations, :trains, :routes
 
@@ -77,7 +78,7 @@ class Main
       number = gets.chomp
       train = CargoTrain.new(number)
     end
-      trains << train
+    trains << train
     main_menu
   end
 
@@ -135,13 +136,13 @@ class Main
     trains.each.with_index { |train, index| puts "#{index} - #{train.number}(#{train.type})" }
     puts "Выберите поезд для добавления к нему вагона"
     number_train = gets.chomp.to_i
-      if trains[number_train].type == :cargo
-        trains[number_train].add_wagon(CargoWagon.new(:cargo))
-      elsif trains[number_train].type == :passenger
-        trains[number_train].add_wagon(PassengerWagon.new(:passenger))
-      end
-    main_menu
+    if trains[number_train].type == :cargo
+    	trains[number_train].add_wagon(CargoWagon.new(:cargo))
+    elsif trains[number_train].type == :passenger
+      trains[number_train].add_wagon(PassengerWagon.new(:passenger))
     end
+    main_menu
+  end
 
   def delete_wagon
     trains.each.with_index { |train, index| puts "#{index} - #{train.number}(#{train.type})" }
@@ -149,7 +150,7 @@ class Main
     number_train = gets.chomp.to_i
     trains[number_train].wagons.delete_wagon
     main_menu
-    end
+  end
 
   def move_train
     trains.each.with_index { |train, index| puts "#{index} - #{train.number}(#{train.type})" }
@@ -164,7 +165,7 @@ class Main
       trains[number_train].move_back
     end
     main_menu
-    end
+  end
 
   def list_trains_and_stations
     stations.each.with_index { |station, index| puts "#{index} - #{station.name}" }
@@ -176,3 +177,6 @@ class Main
     main_menu
   end
 end
+
+main = Main.new
+main.main_menu

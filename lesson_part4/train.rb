@@ -41,7 +41,6 @@ class Train
   def show_current_station
     @route.stations.each do |station|
     @current_station = station if station.trains.include?(self)
-    end
   end
 
   private
@@ -50,9 +49,9 @@ class Train
 
   def next_station
     @route.stations[@route.stations.index(@current_station) + 1] if @current_station != @route.stations.last
-    end
+  end
 
   def previous_station
     @current_station = @route.stations[@route.stations.index(@current_station) - 1] if @current_station != @route.stations.first
-    end
   end
+end
