@@ -55,13 +55,13 @@ class Main
       exit
     end
   end
-
+	asdasd
   def create_station
     puts "Введите название станции"
     name = gets.chomp.to_s
     station = Station.new(name)
     stations << station
-    main_menu
+   main_menu
   end
 
   def create_train
