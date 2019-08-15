@@ -8,7 +8,7 @@ require_relative 'passenger_wagon'
 
 
 class Main
-	attr_reader :stations, :trains, :routes
+   attr_reader :stations, :trains, :routes
 
   def initialize
     @stations = []
@@ -55,7 +55,7 @@ class Main
       exit
     end
   end
-	asdasd
+
   def create_station
     puts "Введите название станции"
     name = gets.chomp.to_s
