@@ -42,7 +42,7 @@ class Train
     @route.stations.each do |station|
     @current_station = station if station.trains.include?(self)
   end
-
+end
   private
 
   attr_writer :speed
