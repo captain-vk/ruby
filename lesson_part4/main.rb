@@ -79,7 +79,7 @@ class Main
       train = CargoTrain.new(number)
     end
     trains << train
-	main_menu
+		main_menu
   end
 
   def create_route
