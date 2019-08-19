@@ -36,8 +36,8 @@ class Train
     @wagons.pop if ((@speed == 0) && (@wagons.size > 0))
   end
 
-	def count_wagons
-		@wagons.size
+  def count_wagons
+  	@wagons.size
 	end
 
   def add_route(route)
