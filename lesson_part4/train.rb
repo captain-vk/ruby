@@ -37,8 +37,8 @@ class Train
   end
 
   def count_wagons
-  	@wagons.size
-	end
+    @wagons.size
+  end
 
   def add_route(route)
     @route = route
