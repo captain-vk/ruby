@@ -5,8 +5,8 @@ module InstanceCounter
   end
   # class
   module ClassMethods
-  	def print_string
-    #attr_accessor :instances
+	def print_string
+	#attr_accessor :instances
     puts "I am here"
 	end
   end
