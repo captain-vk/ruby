@@ -1,14 +1,22 @@
 module InstanceCounter
-	module ClassMethods
-		
+  def self.included(base)
+    base.extend ClassMethods
+    base.send :include, InstanceMethods
+  end
+  # class
+  module ClassMethods
+  	def print_string
+    #attr_accessor :instances
+    puts "I am here"
 	end
-	
-	module InstanceMethods
-		
-	end
-	
-	def self.included(receiver)
-		receiver.extend         ClassMethods
-		receiver.send :include, InstanceMethods
-	end
+  end
+  # instance
+  module InstanceMethods
+    # protected
+    private
+    def register_instance
+      self.class.instances ||= 0
+      self.class.instances += 1
+    end
+  end
 end
