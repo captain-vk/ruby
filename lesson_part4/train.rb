@@ -7,7 +7,7 @@ class Train
 
   attr_reader :number, :type, :current_station, :speed, :route, :wagons
   @@trains = []
-  #@@instances = 0
+  @@instances = 0
 
   def initialize(number, type)
     @number = number
@@ -15,7 +15,7 @@ class Train
     @speed = 0
     @wagons = []
     @@trains[number] = self
-    print_class
+    @@instances += 1
   end
 
   def self.find(number)

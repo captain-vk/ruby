@@ -13,7 +13,6 @@ module InstanceCounter
 
   module InstanceMethods
     def print_class
-    self.class.instances += 1
     puts self.class
     end
   end
