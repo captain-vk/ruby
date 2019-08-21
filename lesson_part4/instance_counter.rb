@@ -5,14 +5,15 @@ module InstanceCounter
   end
   # class
   module ClassMethods
-	def print_string
-	@@instances
+    def print_string
+    @@instances
     puts "I am here"
-	end
+    end
   end
 
   module InstanceMethods
     def print_class
+    self.class.instances += 1
     puts self.class
     end
   end
