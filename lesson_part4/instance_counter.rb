@@ -6,17 +6,14 @@ module InstanceCounter
   # class
   module ClassMethods
 	def print_string
-	#attr_accessor :instances
+	@@instances
     puts "I am here"
 	end
   end
-  # instance
+
   module InstanceMethods
-    # protected
-    private
-    def register_instance
-      self.class.instances ||= 0
-      self.class.instances += 1
+    def print_class
+    puts self.class
     end
   end
 end
