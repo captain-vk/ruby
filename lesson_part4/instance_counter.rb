@@ -8,19 +8,19 @@ module InstanceCounter
     attr_accessor :instances
 
     def print_string
-    @@instances
-    puts "I am here"
+      @@instances
+      puts "I am here"
     end
   
-   def instances
-    @instances = 0
+    def instances
+      @instances = 0
     end
   end
 
   module InstanceMethods
     def print_class
-    self.class.instances += 1
-    puts "Werty"
+      self.class.instances += 1
+      puts "Werty"
     end
   end
 end
