@@ -138,7 +138,7 @@ class Main
     puts "Выберите поезд для добавления к нему вагона"
     number_train = gets.chomp.to_i
     if trains[number_train].type == :cargo
-    	trains[number_train].add_wagon(CargoWagon.new(:cargo))
+      trains[number_train].add_wagon(CargoWagon.new(:cargo))
     elsif trains[number_train].type == :passenger
       trains[number_train].add_wagon(PassengerWagon.new(:passenger))
     end

@@ -69,6 +69,6 @@ end
   end
 
   def previous_station
-    @current_station = @route.stations[@route.stations.index(@current_station) - 1] if @current_station != @route.stations.first
+    @route.stations[@route.stations.index(@current_station) - 1] if @current_station != @route.stations.first
   end
 end
