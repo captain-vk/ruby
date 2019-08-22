@@ -7,7 +7,6 @@ class Train
 
   attr_reader :number, :type, :current_station, :speed, :route, :wagons
   @@trains = []
-  @@instances = 0
 
   def initialize(number, type)
     @number = number

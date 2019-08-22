@@ -3,24 +3,19 @@ module InstanceCounter
     base.extend ClassMethods
     base.send :include, InstanceMethods
   end
-  # class
-  module ClassMethods
-    attr_accessor :instances
 
+  module ClassMethods
     def print_string
       @@instances
       puts "I am here"
     end
-  
-    def instances
-      @instances = 0
-    end
-  end
 
   module InstanceMethods
+    attr_accessor :instances
+	@@instances ||= 0
     def print_class
-      self.class.instances += 1
-      puts "Werty"
+      @@instances += 1
+      puts self.class.class_variable_get(:@@instances)
     end
   end
 end
