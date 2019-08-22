@@ -6,7 +6,6 @@ module InstanceCounter
 
 module ClassMethods
   def print_string
-    @@instances
     puts "I am here"
   end
 
