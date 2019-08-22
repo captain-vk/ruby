@@ -6,19 +6,14 @@ module InstanceCounter
 end
 
 module ClassMethods
+  attr_accessor :instances
   def instances
-    @@instances
-  end
-  def print_string
-    puts "I am here"
+    @instances ||= 0
   end
 end
 
 module InstanceMethods
-  attr_accessor :instances
-  @@instances ||= 0
   def register_instance
-    @@instances += 1
-    puts self.class.class_variable_get(:@@instances)
+    self.class.instances += 1
   end
 end
