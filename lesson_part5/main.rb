@@ -62,7 +62,7 @@ class Main
     name = gets.chomp.to_s
     station = Station.new(name)
     stations << station
-   main_menu
+   #main_menu
   end
 
   def create_train
@@ -80,7 +80,7 @@ class Main
       train = CargoTrain.new(number)
     end
     trains << train
-    main_menu
+    #main_menu
   end
 
   def create_route
