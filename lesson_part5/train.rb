@@ -47,7 +47,7 @@ class Train
     @current_station.add_train(self)
   end
 
-  def move_forward
+  def move_forward  
     @current_station = next_station
   end
 
@@ -60,9 +60,8 @@ class Train
     @current_station = station if station.trains.include?(self)
   end
 end
-  private
 
-  attr_writer :speed
+  private
 
   def next_station
     @route.stations[@route.stations.index(@current_station) + 1] if @current_station != @route.stations.last
