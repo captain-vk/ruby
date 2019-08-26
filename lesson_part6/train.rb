@@ -24,9 +24,8 @@ class Train
   def valid?
     validate!
   rescue
-  	false
+	false
   end
-
 
   def self.find(number)
     @@trains[number]
@@ -78,7 +77,6 @@ end
     raise "Номер поезда не корректен" if number !~ NUMBER_FORMAT  
     true
   end
-
 
   private
 
