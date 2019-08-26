@@ -44,6 +44,5 @@ class Station
     raise "Название станции не корректно" if name.length < 5
     true
   end
-
-
+  
 end
