@@ -24,7 +24,7 @@ class Train
   def valid?
     validate!
   rescue
-	false
+    false
   end
 
   def self.find(number)
