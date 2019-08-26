@@ -1,9 +1,4 @@
-require_relative 'company'
-require_relative 'instance_counter'
-
 class Train
-  include Company
-  include InstanceCounter
 
   attr_reader :number, :type, :current_station, :speed, :route, :wagons
   @@trains = []
@@ -13,12 +8,6 @@ class Train
     @type = type
     @speed = 0
     @wagons = []
-    @@trains[number] = self
-    register_instance  
-  end
-
-  def self.find(number)
-    @@trains[number]
   end
 
   def increase_speed(speed)
