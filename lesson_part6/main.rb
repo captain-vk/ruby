@@ -58,11 +58,19 @@ class Main
   end
 
   def create_station
+    begin
     puts "Введите название станции"
     name = gets.chomp.to_s
+    if Station.new(name).valid?
+      puts "Станция: #{name} создана"
+    end
+    rescue RuntimeError
+      puts "Введите корректное название станции!!!"
+    retry
+    end
     station = Station.new(name)
     stations << station
-   main_menu
+    main_menu
   end
 
   def create_train

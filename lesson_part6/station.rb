@@ -12,7 +12,14 @@ class Station
     @name = name
     @trains = []
     @@stations << self
+    validate!
     register_instance  
+  end
+
+  def valid?
+    validate!
+  rescue
+    false
   end
 
   def self.all
@@ -30,5 +37,13 @@ class Station
   def send_trains(number)
     @trains.delete(number)
   end
+
+  protected
+
+  def validate!
+    raise "Название станции не корректно" if name.length < 5
+    true
+  end
+
 
 end
