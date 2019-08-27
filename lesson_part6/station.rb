@@ -38,7 +38,7 @@ class Station
     @trains.delete(number)
   end
 
-  protectedc
+  protected
 
   def validate!
     validate_number! 
