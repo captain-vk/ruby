@@ -4,7 +4,6 @@ module InstanceCounter
     base.send :include, InstanceMethods
   end
 
-
   module ClassMethods
     attr_accessor :instances
     def instances
