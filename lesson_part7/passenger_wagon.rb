@@ -10,7 +10,7 @@ class PassengerWagon
   	@@instances += 1
     @number = @@instances
   	@total_spaces = total_spaces
-  	@free_spaces = @total_spaces
+  	@free_spaces = total_spaces
     @type = type 
     @@passenger_wagons << self
   end 

@@ -124,19 +124,13 @@ class Main
       passenger_wagons << wagon
       puts wagon
     when 2
-      begin
-      puts "Введите номер поезда"
-      number = gets.chomp 
-      if CargoTrain.new(number).valid? 
-        puts "Поезд с номером: #{number} создан"
-      end
-      rescue RuntimeError
-        puts "Введите коректный номер поезда!!!"
-      retry
-      end
-      train = CargoTrain.new(number)
-    end
-    trains << train
+      puts "Введите объём"
+      volume = gets.chomp 
+      wagon = CargoWagon.new(volume, :cargo)
+      @cargo_wagons << wagon
+      puts @cargo_wagons[0]
+      #@cargo_wagons.each.with_index { |number, total_volume, free_volume, type| puts "#{number} - #{@cargo_wagons.total_volume}(#{@cargo_wagons.type})" }
+
     #main_menu
   end
 
@@ -233,10 +227,10 @@ class Main
     number_station = gets.chomp.to_i
     number_train = stations[number_station].trains.map { |train| train.number}
     type_train = stations[number_station].trains.map { |train| train.type}
-    puts "номер поезда:#{number_train} тип:#{type_train}"
+    puts "номер поезда:#{number_train} тип:#{type_train} количество вагонов: #{trains[number_train].count_wagons}"
     main_menu
   end
 end
-
+end
 main = Main.new
 main.main_menu
