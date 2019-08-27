@@ -19,5 +19,4 @@ class Route
   def delete_station(station)
     @stations.delete(station) if @stations.last != station && @stations.first
   end
-
 end

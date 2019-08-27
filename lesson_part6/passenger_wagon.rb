@@ -5,6 +5,5 @@ class PassengerWagon
 
   def initialize(type)
     @type = type
-  end
-  
+  end  
 end

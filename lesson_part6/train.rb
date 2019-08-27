@@ -16,13 +16,14 @@ class Train
     @type = type
     @speed = 0
     @wagons = []
+    validate_number!    
     @@trains[number] = self
-    validate!
     register_instance  
   end
   
   def valid?
-    validate!
+    validate! 
+    true
   rescue
     false
   end
@@ -68,14 +69,17 @@ class Train
   def show_current_station
     @route.stations.each do |station|
     @current_station = station if station.trains.include?(self)
+    end
   end
-end
 
   protected
 
   def validate!
+    validate_number! 
+  end 
+
+  def validate_number!
     raise "Номер поезда не корректен" if number !~ NUMBER_FORMAT  
-    true
   end
 
   private
@@ -87,5 +91,4 @@ end
   def previous_station
     @route.stations[@route.stations.index(@current_station) - 1] if @current_station != @route.stations.first
   end
-
 end

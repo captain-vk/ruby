@@ -38,11 +38,13 @@ class Station
     @trains.delete(number)
   end
 
-  protected
+  protectedc
 
   def validate!
+    validate_number! 
+  end   
+
+  def validate_number!
     raise "Название станции не корректно" if name.length < 5
-    true
-  end
-  
+  end  
 end
