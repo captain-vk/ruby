@@ -137,25 +137,24 @@ class Main
     when 3 
       puts "Выберите тип вагонов: 1 - пассажирский 2 - грузовой"
       input = gets.chomp.to_i
-        if input == 1
-          passenger_wagons.each.with_index { |wagon, index| puts "Индекс: #{index} Номер вагона:#{wagon.number} Свободных мест:#{wagon.free_spaces} Занятых мест:#{wagon.busy_spaces} Тип:#{wagon.type}" }
-          puts "Введите Индекс вагона в котором требуется занять место"
-          number = gets.chomp.to_i
-          passenger_wagons[number].takes_space
-          passenger_wagons.each { |wagon| puts "Номер вагона:#{wagon.number} Свободных мест:#{wagon.free_spaces} Занятых мест:#{wagon.busy_spaces} Тип:#{wagon.type}" }
-          main_menu
-        end
-        if input == 2
-          cargo_wagons.each.with_index { |wagon, index| puts "Индекс: #{index} Номер вагона:#{wagon.number} Свободный объём:#{wagon.free_volume} Занятый объём:#{wagon.busy_volume} Тип:#{wagon.type}" }
-          puts "Введите Индекс вагона в котором требуется занять объём"
-          number = gets.chomp.to_i
-          current_wagon = cargo_wagons[number]
-          puts "Введите объём"
-          volume = gets.chomp.to_i
-          current_wagon.takes_volume(volume)       
-          cargo_wagons.each { |wagon| puts "Номер вагона:#{wagon.number} Свободный объём:#{wagon.free_volume} Занятый объём:#{wagon.busy_volume} Тип:#{wagon.type}" }
-          main_menu
-        end      
+      if input == 1
+        passenger_wagons.each.with_index { |wagon, index| puts "Индекс: #{index} Номер вагона:#{wagon.number} Свободных мест:#{wagon.free_spaces} Занятых мест:#{wagon.busy_spaces} Тип:#{wagon.type}" }
+        puts "Введите Индекс вагона в котором требуется занять место"
+        number = gets.chomp.to_i
+        passenger_wagons[number].takes_space
+        passenger_wagons.each { |wagon| puts "Номер вагона:#{wagon.number} Свободных мест:#{wagon.free_spaces} Занятых мест:#{wagon.busy_spaces} Тип:#{wagon.type}" }
+        main_menu
+      elsif input == 2
+        cargo_wagons.each.with_index { |wagon, index| puts "Индекс: #{index} Номер вагона:#{wagon.number} Свободный объём:#{wagon.free_volume} Занятый объём:#{wagon.busy_volume} Тип:#{wagon.type}" }
+        puts "Введите Индекс вагона в котором требуется занять объём"
+        number = gets.chomp.to_i
+        current_wagon = cargo_wagons[number]
+        puts "Введите объём"
+        volume = gets.chomp.to_i
+        current_wagon.takes_volume(volume)       
+        cargo_wagons.each { |wagon| puts "Номер вагона:#{wagon.number} Свободный объём:#{wagon.free_volume} Занятый объём:#{wagon.busy_volume} Тип:#{wagon.type}" }
+        main_menu
+      end      
     end
   end
 
