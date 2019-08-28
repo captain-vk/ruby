@@ -40,6 +40,10 @@ class Train
     @speed = 0
   end
 
+  def each_wagon
+  	@wagons.each { |wagon| yield(wagon) }
+  end
+
   def add_wagon(wagon)
     @wagons << wagon if @speed == 0
   end
