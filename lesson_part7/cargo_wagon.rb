@@ -9,8 +9,8 @@ class CargoWagon
   def initialize(total_volume, type)
   	@@instances += 1
     @number = @@instances
-  	@total_volume = total_volume
-  	@free_volume = total_volume
+		@total_volume = total_volume
+		@free_volume = total_volume
     @@cargo_wagons << self
     @type = type    
   end 
