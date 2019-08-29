@@ -16,15 +16,15 @@ class CargoWagon
   end 
 
   def takes_volume(volume)
-  	raise "Не хватит места" if @free_volume < volume
-  	@free_volume -= volume
+    raise "Не хватит места" if @free_volume < volume
+    @free_volume -= volume
   end
 
   def busy_volume
-  	@total_volume - @free_volume
+    @total_volume - @free_volume
   end
 
   def free_volume
-  	@free_volume
+    @free_volume
   end 
 end
