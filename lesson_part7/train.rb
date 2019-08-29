@@ -41,7 +41,7 @@ class Train
   end
 
   def each_wagon
-  	@wagons.each { |wagon| yield(wagon) }
+    @wagons.each { |wagon| yield(wagon) }
   end
 
   def add_wagon(wagon)

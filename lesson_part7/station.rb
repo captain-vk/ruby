@@ -31,7 +31,7 @@ class Station
   end
 
   def each_train
-  	@trains.each { |train| yield(train) }
+    @trains.each { |train| yield(train) }
   end  
 
   def list_of_trains_by_type(type)

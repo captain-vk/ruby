@@ -7,7 +7,6 @@ require_relative 'cargo_wagon'
 require_relative 'passenger_wagon'
 require_relative 'company'
 
-
 class Main
   attr_reader :stations, :trains, :routes, :passenger_wagons, :cargo_wagons
 
@@ -116,7 +115,6 @@ class Main
     puts "Нажмите 1 чтобы, создать пассажирский вагон"
     puts "Нажмите 2 чтобы, создать грузовой вагон"
     puts "Нажмите 3 чтобы, занять место или объём в вагоне"
-
     input = gets.chomp.to_i
     case input
     when 1
