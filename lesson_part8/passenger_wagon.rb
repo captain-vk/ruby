@@ -5,8 +5,8 @@ class PassengerWagon
   include Company
   attr_reader :type, :number, :total_spaces, :free_spaces
 
-  @@instances = 0
-  @@passenger_wagons = []
+  @instances = 0
+  @passenger_wagons = []
 
   def initialize(total_spaces, type)
     @@instances += 1
@@ -15,6 +15,10 @@ class PassengerWagon
     @free_spaces = total_spaces
     @type = type
     @@passenger_wagons << self
+  end
+
+  def instances
+    @@instances
   end
 
   def takes_space
@@ -29,5 +33,9 @@ class PassengerWagon
 
   def free_spaces?
     free_spaces
+  end
+
+  def passenger_wagons
+    @@passenger_wagons
   end
 end

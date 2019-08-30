@@ -9,7 +9,7 @@ class Train
 
   attr_reader :number, :type, :current_station, :speed, :route, :wagons
 
-  @@trains = {}
+  @trains = {}
 
   NUMBER_FORMAT = /^[а-яА-Я0-9]{3}-?[а-яА-Я0-9]{2}$/.freeze
 
@@ -21,6 +21,10 @@ class Train
     validate_number!
     @@trains[number] = self
     register_instance
+  end
+
+  def trains
+    @@trains
   end
 
   def valid?

@@ -5,16 +5,20 @@ class CargoWagon
   include Company
   attr_reader :type, :number, :total_volume, :free_volume
 
-  @@instances = 0
-  @@cargo_wagons = []
+  @instances = 0
+  @cargo_wagons = []
 
   def initialize(total_volume, type)
-    @@instances += 1
+    @instances += 1
     @number = @@instances
     @total_volume = total_volume
     @free_volume = total_volume
     @@cargo_wagons << self
     @type = type
+  end
+
+  def instances
+    @@instances
   end
 
   def takes_volume(volume)
@@ -29,5 +33,9 @@ class CargoWagon
 
   def free_volume?
     @free_volume
+  end
+
+  def cargo_wagons
+    @@cargo_wagons
   end
 end

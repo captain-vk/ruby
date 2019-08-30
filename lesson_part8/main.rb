@@ -49,7 +49,7 @@ class Main
     when 6
       delete_stations_on_route
     when 7
-      get_route_to_train
+      set_route_to_train
     when 8
       add_wagon
     when 9
@@ -72,8 +72,7 @@ class Main
       puts 'Введите корректное название станции!!!'
       retry
     end
-    station = Station.new(name)
-    stations << station
+    stations << Station.new(name)
     main_menu
   end
 
@@ -83,27 +82,35 @@ class Main
     input = gets.chomp.to_i
     case input
     when 1
-      begin
-        puts 'Введите номер поезда'
-        number = gets.chomp
-        puts "Поезд с номером: #{number} создан" if PassengerTrain.new(number).valid?
-      rescue RuntimeError
-        puts 'Введите коректный номер поезда!!!'
-        retry
-      end
-      train = PassengerTrain.new(number)
+      new_passenger_train
     when 2
-      begin
-        puts 'Введите номер поезда'
-        number = gets.chomp
-        puts "Поезд с номером: #{number} создан" if CargoTrain.new(number).valid?
-      rescue RuntimeError
-        puts 'Введите коректный номер поезда!!!'
-        retry
-      end
-      train = CargoTrain.new(number)
+      new_cargo_train
     end
-    trains << train
+  end
+
+  def new_passenger_train
+    begin
+      puts 'Введите номер поезда'
+      number = gets.chomp
+      puts "Поезд с номером: #{number} создан" if PassengerTrain.new(number).valid?
+    rescue RuntimeError
+      puts 'Введите коректный номер поезда!!!'
+      retry
+    end
+    trains << PassengerTrain.new(number)
+    main_menu
+  end
+
+  def new_cargo_train
+    begin
+      puts 'Введите номер поезда'
+      number = gets.chomp
+      puts "Поезд с номером: #{number} создан" if CargoTrain.new(number).valid?
+    rescue RuntimeError
+      puts 'Введите коректный номер поезда!!!'
+      retry
+    end
+    trains << CargoTrain.new(number)
     main_menu
   end
 
@@ -221,7 +228,7 @@ class Main
     main_menu
   end
 
-  def get_route_to_train
+  def set_route_to_train
     puts 'Выберите маршрут для поезда'
     routes.each.with_index { |route, index| puts "#{index} - #{route.stations.map(&:name)}" }
     number_route = gets.chomp.to_i
@@ -242,8 +249,8 @@ class Main
       cargo_wagons.each.with_index do |wagon, index|
         puts "Индекс: #{index}
         Номер вагона:#{wagon.number}
-        Свободный объём:#{wagon.free_volume}
-        Занятый объём:#{wagon.busy_volume}
+        Свободный объём:#{wagon.free_volume?}
+        Занятый объём:#{wagon.busy_volume?}
         Тип:#{wagon.type}"
       end
       puts 'Введите Индекс вагона для добавления'
@@ -280,10 +287,9 @@ class Main
     number_train = gets.chomp.to_i
     puts 'Для перемещения вперед нажмите 1 для перемещения назад 2'
     input = gets.chomp.to_i
-    case input
-    when 1
+    if input == 1 
       trains[number_train].move_forward
-    when 2
+    elsif input == 2 
       trains[number_train].move_back
     end
     main_menu
