@@ -17,10 +17,6 @@ class CargoWagon
     @type = type
   end
 
-  def instances
-    @@instances
-  end
-
   def takes_volume(volume)
     raise 'Не хватит места' if @free_volume < volume
 

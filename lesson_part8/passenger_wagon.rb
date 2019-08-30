@@ -17,10 +17,6 @@ class PassengerWagon
     @@passenger_wagons << self
   end
 
-  def instances
-    @@instances
-  end
-
   def takes_space
     raise 'Свободных мест нет' if @free_spaces.zero?
 
