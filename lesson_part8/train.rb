@@ -11,7 +11,7 @@ class Train
 
   @trains = {}
 
-  NUMBER_FORMAT = /^[а-яА-Я0-9]{3}-?[а-яА-Я0-9]{2}$/.freeze
+  NUMBER_FORMAT = /^[а-яА-Я0-9]{3}-?[а-яА-Я0-9]{2}$/
 
   def initialize(number, type)
     @number = number

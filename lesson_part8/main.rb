@@ -114,81 +114,85 @@ class Main
     main_menu
   end
 
+  INPUT = { '1': 'create_pass_wagon', '2': 'create_cargo_wagon', '3': 'control_wagons' }.freeze
+
   def create_wagon
+    input1 = { '1': 'create_pass_wagon', '2': 'create_cargo_wagon', '3': 'control_wagons' }.freeze
     puts 'Нажмите 1 чтобы, создать пассажирский вагон'
     puts 'Нажмите 2 чтобы, создать грузовой вагон'
     puts 'Нажмите 3 чтобы, занять место или объём в вагоне'
     input = gets.chomp.to_i
-    case input
-    when 1
-      puts 'Введите количество мест'
+    send.input1[input]
+  end
+
+  def control_wagons
+    puts 'Выберите тип вагонов: 1 - пассажирский 2 - грузовой'
+    input = gets.chomp.to_i
+    if input == 1
+      show_pass_wagons
+      puts 'Введите Индекс вагона в котором требуется занять место'
       number = gets.chomp.to_i
-      wagon = PassengerWagon.new(number, :passenger)
-      passenger_wagons << wagon
-      passenger_wagons.each do |wagon|
-        puts "Номер вагона:#{wagon.number}
-         Свободных мест:#{wagon.free_spaces?}
-         Занятых мест:#{wagon.busy_spaces?}
-         Тип:#{wagon.type}"
-      end
-      puts passenger_wagons
+      passenger_wagons[number].takes_space
+      show_pass_wagons
       main_menu
-    when 2
-      puts 'Введите объём'
-      volume = gets.chomp.to_i
-      wagon = CargoWagon.new(volume, :cargo)
-      @cargo_wagons << wagon
-      cargo_wagons.each do |wagon|
-        puts "Номер вагона:#{wagon.number}
-         Свободный объём:#{wagon.free_volume?}
-         Занятый объём:#{wagon.busy_volume?}
-         Тип:#{wagon.type}"
-      end
-      main_menu
-    when 3
-      puts 'Выберите тип вагонов: 1 - пассажирский 2 - грузовой'
-      input = gets.chomp.to_i
-      if input == 1
-        passenger_wagons.each.with_index do |wagon, index|
-          puts "Индекс: #{index}
-          Номер вагона:#{wagon.number}
-          Свободных мест:#{wagon.free_spaces?}
-          Занятых мест:#{wagon.busy_spaces?}
-          Тип:#{wagon.type}"
-        end
-        puts 'Введите Индекс вагона в котором требуется занять место'
-        number = gets.chomp.to_i
-        passenger_wagons[number].takes_space
-        passenger_wagons.each do |wagon|
-          puts "Номер вагона:#{wagon.number}
-          Свободных мест:#{wagon.free_spaces?}
-          Занятых мест:#{wagon.busy_spaces?}
-          Тип:#{wagon.type}"
-        end
-        main_menu
-      elsif input == 2
-        cargo_wagons.each.with_index do |wagon, index|
-          puts "Индекс: #{index}
-          Номер вагона:#{wagon.number}
-          Свободный объём:#{wagon.free_volume?}
-          Занятый объём:#{wagon.busy_volume?}
-          Тип:#{wagon.type}"
-        end
-        puts 'Введите Индекс вагона в котором требуется занять объём'
-        number = gets.chomp.to_i
-        current_wagon = cargo_wagons[number]
-        puts 'Введите объём'
+    elsif input == 2
+      show_cargo_wagons
+      puts 'Введите Индекс вагона в котором требуется занять объём'
+      number = gets.chomp.to_i
+              current_wagon = cargo_wagons[number]
+        puts "Введите объём"
         volume = gets.chomp.to_i
         current_wagon.takes_volume(volume)
-        cargo_wagons.each do |wagon|
-          puts "Номер вагона:#{wagon.number}
-          Свободный объём:#{wagon.free_volume?}
-          Занятый объём:#{wagon.busy_volume?}
-          Тип:#{wagon.type}"
-        end
-        main_menu
-      end
+      cargo_wagons[number].takes_space
+      show_cargo_wagons
+      main_menu
     end
+  end
+
+  def create_pass_wagon
+    puts 'Введите количество мест'
+    number = gets.chomp.to_i
+    wagon_new = PassengerWagon.new(number, :passenger)
+    passenger_wagons << wagon_new
+    show_curr_pass_wagon(wagon_new)
+    main_menu
+  end
+
+  def show_cargo_wagons
+    passenger_wagons.each.with_index do |wagon, index|
+      puts "Индекс: #{index}
+      Номер вагона:#{wagon.number}
+      Свободных мест:#{wagon.free_spaces?}
+      Занятых мест:#{wagon.busy_spaces?}
+      Тип:#{wagon.type}"
+    end
+  end
+
+  def show_pass_wagons
+    passenger_wagons.each.with_index do |wagon, index|
+      puts "Индекс: #{index}
+      Номер вагона:#{wagon.number}
+      Свободных мест:#{wagon.free_spaces?}
+      Занятых мест:#{wagon.busy_spaces?}
+      Тип:#{wagon.type}"
+    end
+  end
+
+  def create_cargo_wagon
+    puts 'Введите количество объёма'
+    number = gets.chomp.to_i
+    wagon_new = CargoWagon.new(number, :cargo)
+    cargo_wagons << wagon_new
+    show_curr_carr_wagon(wagon_new)
+    main_menu
+  end
+
+  def show_curr_pass_wagon(wagon)
+    puts "Вагон номер: #{wagon.number} Всего мест: #{wagon.total_spaces}"
+  end
+
+  def show_curr_carr_wagon(wagon)
+    puts "Вагон номер: #{wagon.number} Весь объём: #{wagon.total_spaces}"
   end
 
   def create_route
@@ -287,9 +291,9 @@ class Main
     number_train = gets.chomp.to_i
     puts 'Для перемещения вперед нажмите 1 для перемещения назад 2'
     input = gets.chomp.to_i
-    if input == 1 
+    if input == 1
       trains[number_train].move_forward
-    elsif input == 2 
+    elsif input == 2
       trains[number_train].move_back
     end
     main_menu

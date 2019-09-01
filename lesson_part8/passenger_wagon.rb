@@ -1,16 +1,17 @@
 # frozen_string_literal: true
 
 require_relative 'company'
+require_relative 'instance_counter'
 class PassengerWagon
   include Company
+  include InstanceCounter
+
   attr_reader :type, :number, :total_spaces, :free_spaces
 
-  @@instances = 0
   @@passenger_wagons = []
 
   def initialize(total_spaces, type)
-    @@instances += 1
-    @number = @@instances
+    @number = register_instance
     @total_spaces = total_spaces
     @free_spaces = total_spaces
     @type = type
