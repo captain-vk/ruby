@@ -116,22 +116,16 @@ class Main
   end
 
   def control_pass_wagons
-    show_pass_wagons
-    puts 'Введите Индекс вагона в котором требуется занять место'
-    number = gets.chomp.to_i
+    number = show_pass_wagons
     passenger_wagons[number].takes_space
-    show_pass_wagons
     main_menu
   end
 
   def control_cargo_wagons
-    show_cargo_wagons
-    puts 'Введите Индекс вагона в котором требуется занять объём'
-    number = gets.chomp.to_i
+    number = show_cargo_wagons
     puts 'Введите объём'
     volume = gets.chomp.to_i
     cargo_wagons[number].takes_volume(volume)
-    show_cargo_wagons
     main_menu
   end
 
@@ -152,6 +146,9 @@ class Main
       Занятый объём:#{wagon.busy_volume?}
       Тип:#{wagon.type}"
     end
+    puts 'Введите Индекс вагона'
+    number_wagon = gets.chomp.to_i
+    number_wagon
   end
 
   def show_pass_wagons
@@ -162,6 +159,9 @@ class Main
       Занятых мест:#{wagon.busy_spaces?}
       Тип:#{wagon.type}"
     end
+    puts 'Введите Индекс вагона'
+    number_wagon = gets.chomp.to_i
+    number_wagon
   end
 
   def create_cargo_wagon
@@ -182,55 +182,58 @@ class Main
   end
 
   def create_route
+    stations = list_stations
+    routes << Route.new(@stations[stations[0]], @stations[stations[1]])
+    main_menu
+  end
+
+  def list_stations
     puts 'Для создания маршрута требуется ввести 2 станции из общего списка станций'
     stations.each.with_index { |station, index| puts "#{index} - #{station.name}" }
     puts 'Введите номер начальной станции'
     number_first = gets.chomp.to_i
     puts 'Введите номер конечной станции'
     number_last = gets.chomp.to_i
-    routes << Route.new(@stations[number_first], @stations[number_last])
-    main_menu
+    [number_first, number_last]
   end
 
   def add_stations_on_route
-    routes.each.with_index { |route, index| puts "#{index} - #{route.stations.map(&:name)}" }
-    puts 'Выберите маршрут в который требуется добавить станцию - введите номер'
-    number_route = gets.chomp.to_i
-    current_route = routes[number_route]
-    puts 'Введите номер промежуточной станции'
-    stations.each.with_index { |station, index| puts "#{index} - #{station.name}" }
-    number_station = gets.chomp.to_i
-    current_route.add_station(stations[number_station])
+    current_route = routes[change_route]
+    station_number = show_station
+    current_route.add_station(stations[station_number])
     main_menu
   end
 
-  def delete_stations_on_route
-    routes.each.with_index { |route, index| puts "#{index} - #{route.stations.map(&:name)}" }
-    puts 'Выберите маршрут в котором требуется удалить станцию - введите номер'
-    number_route = gets.chomp.to_i
-    current_route = routes[number_route]
+  def show_station
     puts 'Введите номер промежуточной станции'
     stations.each.with_index { |station, index| puts "#{index} - #{station.name}" }
-    number_station = gets.chomp.to_i
-    current_route.delete_station(stations[number_station])
+    station_number = gets.chomp.to_i
+    station_number
+  end
+
+  def change_route
+    routes.each.with_index { |route, index| puts "#{index} - #{route.stations.map(&:name)}" }
+    puts 'Выберите маршрут - введите номер'
+    number_route = gets.chomp.to_i
+    number_route
+  end
+
+  def delete_stations_on_route
+    current_route = routes[change_route]
+    station_number = show_station
+    current_route.delete_station(stations[station_number])
     main_menu
   end
 
   def set_route_to_train
-    puts 'Выберите маршрут для поезда'
-    routes.each.with_index { |route, index| puts "#{index} - #{route.stations.map(&:name)}" }
-    number_route = gets.chomp.to_i
-    current_route = routes[number_route]
-    puts 'Выберите поезд'
-    trains.each.with_index { |train, index| puts "#{index} - #{train.number}(#{train.type})" }
-    number_train = gets.chomp.to_i
+    current_route = routes[change_route]
+    number_train = show_trains
     trains[number_train].add_route(current_route)
     main_menu
   end
 
   def add_wagon
-    show_trains
-    number_train = gets.chomp.to_i
+    number_train = show_trains
     if trains[number_train].type == :cargo
       add_cargo_wagon(number_train)
     elsif trains[number_train].type == :passenger
@@ -239,34 +242,28 @@ class Main
   end
 
   def add_pass_wagon(number_train)
-    show_pass_wagons
-    puts 'Введите Индекс вагона для добавления'
-    number_wagon = gets.chomp.to_i
+    number_wagon = show_pass_wagons
     trains[number_train].add_wagon(passenger_wagons[number_wagon])
     puts "Количество вагонов у данного поезда - #{trains[number_train].count_wagons}"
     main_menu
   end
 
   def add_cargo_wagon(number_train)
-    show_cargo_wagons
-    puts 'Введите Индекс вагона для добавления'
-    number_wagon = gets.chomp.to_i
+    number_wagon = show_cargo_wagons
     trains[number_train].add_wagon(cargo_wagons[number_wagon])
     puts "Количество вагонов у данного поезда - #{trains[number_train].count_wagons}"
     main_menu
   end
 
   def delete_wagon
-    show_trains
-    number_train = gets.chomp.to_i
+    number_train = show_trains
     trains[number_train].delete_wagon unless trains[number_train].wagons.empty?
     puts "Количество вагонов у данного поезда - #{trains[number_train].count_wagons}"
     main_menu
   end
 
   def move_train
-    show_trains
-    number_train = gets.chomp.to_i
+    number_train = show_trains
     puts 'Для перемещения вперед нажмите 1 для перемещения назад 2'
     input = gets.chomp.to_i
     if input == 1
@@ -280,11 +277,12 @@ class Main
   def show_trains
     trains.each.with_index { |train, index| puts "#{index} - #{train.number}(#{train.type})" }
     puts 'Выберите поезд'
+    number_train = gets.chomp.to_i
+    number_train
   end
 
   def list_trains_wagons
-    show_trains
-    number_train = gets.chomp.to_i
+    number_train = show_trains
     if trains[number_train].type == :cargo
       list_trains_wagons_cargo(number_train)
     elsif trains[number_train].type == :passenger
@@ -312,15 +310,20 @@ class Main
   end
 
   def list_stations_trains
-    stations.each.with_index { |station, index| puts "#{index} - #{station.name}" }
-    puts 'Введите номер станции для просмотра поездов на ней'
-    number_station = gets.chomp.to_i
+    number_station = show_stations
     stations[number_station].each_train do |train|
       puts "номер поезда:#{train.number}
       тип:#{train.type}
       количество вагонов: #{train.count_wagons}"
     end
     main_menu
+  end
+
+  def show_stations
+    stations.each.with_index { |station, index| puts "#{index} - #{station.name}" }
+    puts 'Введите номер станции для просмотра поездов на ней'
+    number_station = gets.chomp.to_i
+    number_station
   end
 end
 main = Main.new
