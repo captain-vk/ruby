@@ -4,17 +4,14 @@ require_relative 'company'
 require_relative 'instance_counter'
 require_relative 'validation'
 
-
 class Station
   include Company
   include InstanceCounter
   include Validation
 
-
   attr_reader :trains, :name
   @@stations = []
   validate :name, :presence
-
 
   def initialize(name)
     @name = name

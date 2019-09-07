@@ -1,8 +1,6 @@
-
 # frozen_string_literal: true
 
 module Validation
-
   def self.included(base)
     base.extend ClassMethods
     base.send :include, InstanceMethods
@@ -29,23 +27,23 @@ module Validation
     def valid?
       validate!
       true
-    rescue
+    rescue StandardError
       false
     end
 
     private
 
     def validate_presence(attr, _)
-      raise "Строка пустая или nil" if attr == nil || attr.empty?
+      raise 'Строка пустая или nil' if attr.nil? || attr.empty?
     end
 
     def validate_format(attr, format)
-      raise "Не соответствует формату" if attr.to_s !~ format    
+      raise 'Не соответствует формату' if attr.to_s !~ format
     end
 
     def validate_type(attr, format)
-      raise "Не соответствует заданному классу" if attr.to_s !~ format    
-    end  
+      raise 'Не соответствует заданному классу' if attr.to_s !~ format
+    end
   end
 end
 
