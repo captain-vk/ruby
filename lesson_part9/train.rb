@@ -2,23 +2,26 @@
 
 require_relative 'company'
 require_relative 'instance_counter'
+require_relative 'validation'
 
 class Train
   include Company
   include InstanceCounter
+  include Validation
 
   attr_reader :number, :type, :current_station, :speed, :route, :wagons
 
   @@trains = {}
 
   NUMBER_FORMAT = /^[а-яА-Я0-9]{3}-?[а-яА-Я0-9]{2}$/.freeze
+  validate :number, :format, NUMBER_FORMAT
 
   def initialize(number, type)
     @number = number
     @type = type
     @speed = 0
     @wagons = []
-    validate_number!
+    validate!
     @@trains[number] = self
     register_instance
   end
@@ -82,15 +85,15 @@ class Train
     end
   end
 
-  protected
+  # protected
 
-  def validate!
-    validate_number!
-  end
+  # def validate!
+  #   validate_number!
+  # end
 
-  def validate_number!
-    raise 'Номер поезда не корректен' if number !~ NUMBER_FORMAT
-  end
+  # def validate_number!
+  #   raise 'Номер поезда не корректен' if number !~ NUMBER_FORMAT
+  # end
 
   private
 

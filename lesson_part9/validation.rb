@@ -6,10 +6,10 @@ module Validation
     base.send :include, InstanceMethods
   end
 
-  module CLassMethods
-    def validate(var, type, arg)
+  module ClassMethods
+    def validate(type, var, arg = nil)
       @validations ||= []
-      @validations.push(type: type, arg: arg, var: var)
+      @validations.push(type: type, var: var, arg: arg)
     end
 
     def validations
@@ -20,7 +20,7 @@ module Validation
   module InstanceMethods
     def validate!
       self.class.validations.each do |validation|
-        send("validate_#{validation[:type]}".to_sym, validation[:var], validation[:arg])
+        send("validate_#{validation[:type]}".to_sym, instance_variable_get("@#{validation[:var]}"), validation[:arg])
       end
     end
 
@@ -41,8 +41,8 @@ module Validation
       raise 'Не соответствует формату' if attr.to_s !~ format
     end
 
-    def validate_type(attr, format)
-      raise 'Не соответствует заданному классу' if attr.to_s !~ format
+    def validate_type(attr, type)
+      raise 'Не соответствует заданному классу' if attr.to_s !~ type
     end
   end
 end

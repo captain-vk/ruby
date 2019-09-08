@@ -16,8 +16,8 @@ class Station
   def initialize(name)
     @name = name
     @trains = []
+    validate!
     @@stations << self
-    # validate!
     register_instance
   end
 
@@ -25,11 +25,11 @@ class Station
     @@stations
   end
 
-  # def valid?
-  #   validate!
-  # rescue StandardError
-  #   false
-  # end
+  def valid?
+    validate!
+  rescue StandardError
+    false
+  end
 
   def self.all
     @@stations
