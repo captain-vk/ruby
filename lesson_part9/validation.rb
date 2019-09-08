@@ -38,7 +38,7 @@ module Validation
     end
 
     def validate_format(attr, format)
-      raise 'Не соответствует формату' if attr.to_s !~ format
+      raise 'Не соответствует формату' if attr !~ format
     end
 
     def validate_type(attr, type)
