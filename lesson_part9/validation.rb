@@ -7,7 +7,7 @@ module Validation
   end
 
   module ClassMethods
-    def validate(type, var, arg = nil)
+    def validate(var, type, arg = nil)
       @validations ||= []
       @validations.push(type: type, var: var, arg: arg)
     end
