@@ -30,12 +30,12 @@ class Train
     @@trains
   end
 
-  def valid?
-    validate!
-    true
-  rescue StandardError
-    false
-  end
+  # def valid?
+  #   validate!
+  #   true
+  # rescue StandardError
+  #   false
+  # end
 
   def self.find(number)
     @@trains[number]

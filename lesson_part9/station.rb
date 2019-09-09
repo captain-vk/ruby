@@ -25,11 +25,11 @@ class Station
     @@stations
   end
 
-  def valid?
-    validate!
-  rescue StandardError
-    false
-  end
+  # def valid?
+  #   validate!
+  # rescue StandardError
+  #   false
+  # end
 
   def self.all
     @@stations
