@@ -3,7 +3,7 @@
 module Validation
   def self.included(base)
     base.extend ClassMethods
-    base.send :prepend, InstanceMethods
+    base.send :include, InstanceMethods
   end
 
   module ClassMethods
