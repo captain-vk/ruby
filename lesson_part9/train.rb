@@ -14,7 +14,6 @@ class Train
   @@trains = {}
 
   NUMBER_FORMAT = /^[а-яА-Я0-9]{3}-?[а-яА-Я0-9]{2}$/.freeze
-  validate :number, :format, NUMBER_FORMAT
 
   def initialize(number, type)
     @number = number

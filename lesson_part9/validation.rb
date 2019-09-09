@@ -27,7 +27,7 @@ module Validation
     def valid?
       validate!
       true
-    rescue StandardError
+    rescue RuntimeError
       false
     end
 
@@ -42,7 +42,7 @@ module Validation
     end
 
     def validate_type(attr, type)
-      raise 'Не соответствует заданному классу' if attr.to_s !~ type
+      raise 'Не соответствует заданному классу' if attr.class != type
     end
   end
 end

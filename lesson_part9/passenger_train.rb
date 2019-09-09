@@ -13,6 +13,7 @@ class PassengerTrain < Train
   validate :number, :format, NUMBER_FORMAT
 
   def initialize(number, type = :passenger)
+    @number = number
     validate!
     super
   end

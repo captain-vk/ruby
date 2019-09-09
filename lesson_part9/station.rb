@@ -12,6 +12,7 @@ class Station
   attr_reader :trains, :name
   @@stations = []
   validate :name, :presence
+  validate :name, :type, String
 
   def initialize(name)
     @name = name
